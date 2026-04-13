@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-purple-600 to-purple-700 rounded-3xl overflow-hidden mb-12">
+        <div class="px-8 py-16 sm:px-12 sm:py-20">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">
+                {% if author %}Edit Author{% else %}Add New Author{% endif %}
+            </h1>
+            <p class="text-purple-100">
+                {% if author %}Update author details: <strong>{{ author.name }}</strong>{% else %}Create a new author for your library{% endif %}
+            </p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+            <!-- Display errors if any -->
+            {% if form.non_field_errors %}
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                <ul class="list-disc list-inside">
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" class="space-y-8">
+                {% csrf_token %}
+
+                <!-- Author Information Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-200">
+                        Author Information
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Name -->
+                        <div>
+                            <label for="{{ form.name.id_for_label }}" class="block text-sm font-semibold text-slate-900 mb-2">
+                                {{ form.name.label }}
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {% for error in form.name.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="{{ form.email.id_for_label }}" class="block text-sm font-semibold text-slate-900 mb-2">
+                                {{ form.email.label }}
+                            </label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {% for error in form.email.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Biography -->
+                        <div>
+                            <label for="{{ form.bio.id_for_label }}" class="block text-sm font-semibold text-slate-900 mb-2">
+                                {{ form.bio.label }}
+                            </label>
+                            {{ form.bio }}
+                            {% if form.bio.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {% for error in form.bio.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Gender -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-900 mb-3">
+                                {{ form.gender.label }}
+                            </label>
+                            <div class="flex gap-6">
+                                {% for radio_id, radio_label in form.gender.field.choices %}
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="radio" name="gender" value="{{ radio_id }}" {% if form.gender.value == radio_id %}checked{% endif %} class="w-5 h-5">
+                                    <span class="text-slate-700">{{ radio_label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                            {% if form.gender.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {% for error in form.gender.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Author Photo -->
+                        <div>
+                            <label for="{{ form.photo.id_for_label }}" class="block text-sm font-semibold text-slate-900 mb-2">
+                                {{ form.photo.label }} (Optional)
+                            </label>
+                            {{ form.photo }}
+                            {% if form.photo.errors %}
+                            <p class="text-red-600 text-sm mt-1">
+                                {% for error in form.photo.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                            {% if author.photo %}
+                            <div class="mt-4">
+                                <p class="text-sm text-slate-600 mb-2">Current photo:</p>
+                                <img src="{{ author.photo.url }}" alt="{{ author.name }}" class="w-32 h-32 rounded-lg object-cover border border-slate-200">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex gap-4 pt-6 border-t border-slate-200">
+                    <button type="submit" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                        {% if author %}Update Author{% else %}Create Author{% endif %}
+                    </button>
+                    <a href="{% url 'authors:index' %}" class="flex-1 px-6 py-3 border border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold rounded-lg transition-colors duration-200 text-center">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

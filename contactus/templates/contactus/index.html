@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl overflow-hidden mb-16">
+        <div class="px-8 py-20 sm:px-12 sm:py-24">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                Get In Touch
+            </h1>
+            <p class="text-lg text-blue-100">
+                We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <!-- Contact Form -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6">
+                <h2 class="text-2xl font-bold text-white">Send us a Message</h2>
+            </div>
+            
+            <form class="p-8 space-y-6">
+                <!-- Name Field -->
+                <div>
+                    <label class="block text-slate-700 font-semibold mb-2">Full Name</label>
+                    <input 
+                        type="text" 
+                        placeholder="Your Name"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    >
+                </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label class="block text-slate-700 font-semibold mb-2">Email Address</label>
+                    <input 
+                        type="email" 
+                        placeholder="your@email.com"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    >
+                </div>
+
+                <!-- Subject Field -->
+                <div>
+                    <label class="block text-slate-700 font-semibold mb-2">Subject</label>
+                    <input 
+                        type="text" 
+                        placeholder="How can we help?"
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    >
+                </div>
+
+                <!-- Message Field -->
+                <div>
+                    <label class="block text-slate-700 font-semibold mb-2">Message</label>
+                    <textarea 
+                        rows="5"
+                        placeholder="Tell us more about your inquiry..."
+                        class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                    Send Message
+                </button>
+            </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="space-y-8">
+            <!-- Email Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">📧</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Email</h3>
+                        <p class="text-slate-700">
+                            <a href="mailto:info@itistore.com" class="text-blue-600 hover:text-blue-700 font-semibold">
+                                info@itistore.com
+                            </a>
+                        </p>
+                        <p class="text-slate-500 text-sm mt-1">We'll respond within 24 hours</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">📱</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Phone</h3>
+                        <p class="text-slate-700">
+                            <a href="tel:+201000000000" class="text-blue-600 hover:text-blue-700 font-semibold">
+                                +20 100 000 0000
+                            </a>
+                        </p>
+                        <p class="text-slate-500 text-sm mt-1">Available Mon - Fri, 9am - 5pm</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">📍</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Address</h3>
+                        <p class="text-slate-700">
+                            ITI Branch<br>
+                            Cairo, Egypt
+                        </p>
+                        <p class="text-slate-500 text-sm mt-1">Visit us for in-store shopping</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hours Card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+                <div class="flex items-start gap-4">
+                    <div class="text-3xl">🕐</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Business Hours</h3>
+                        <p class="text-slate-700">
+                            Monday - Friday: 9:00 AM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 4:00 PM<br>
+                            Sunday: Closed
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="bg-slate-50 rounded-3xl p-8 sm:p-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Frequently Asked Questions</h2>
+        
+        <div class="max-w-3xl mx-auto space-y-4">
+            <!-- FAQ Item 1 -->
+            <details class="bg-white rounded-lg border border-slate-200">
+                <summary class="cursor-pointer px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50">
+                    How long does shipping take?
+                </summary>
+                <p class="px-6 py-4 text-slate-700 border-t border-slate-200">
+                    Typically, orders are shipped within 2-3 business days. Delivery usually takes 3-7 days depending on your location.
+                </p>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details class="bg-white rounded-lg border border-slate-200">
+                <summary class="cursor-pointer px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50">
+                    What is your return policy?
+                </summary>
+                <p class="px-6 py-4 text-slate-700 border-t border-slate-200">
+                    We offer a 30-day return policy for unopened books in original condition. Please contact us for more details.
+                </p>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details class="bg-white rounded-lg border border-slate-200">
+                <summary class="cursor-pointer px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50">
+                    Do you offer international shipping?
+                </summary>
+                <p class="px-6 py-4 text-slate-700 border-t border-slate-200">
+                    Yes, we ship to most countries worldwide. International shipping costs and times vary. Please contact us for details.
+                </p>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details class="bg-white rounded-lg border border-slate-200">
+                <summary class="cursor-pointer px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50">
+                    Is payment secure?
+                </summary>
+                <p class="px-6 py-4 text-slate-700 border-t border-slate-200">
+                    Yes, all transactions are encrypted and secure. We accept multiple payment methods for your convenience.
+                </p>
+            </details>
+        </div>
+    </section>
+{% endblock %}

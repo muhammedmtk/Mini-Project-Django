@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-teal-600 to-teal-700 rounded-3xl overflow-hidden mb-16">
+        <div class="px-8 py-20 sm:px-12 sm:py-24">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+                About ITI Store
+            </h1>
+            <p class="text-lg text-teal-100">
+                Your trusted destination for quality books and knowledge
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <!-- Text Content -->
+        <div>
+            <h2 class="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
+            <p class="text-slate-700 text-lg leading-relaxed mb-4">
+                This is a lab project for ITI - Open Source Track. We are dedicated to providing a comprehensive platform for book lovers and learners.
+            </p>
+            <p class="text-slate-700 text-lg leading-relaxed mb-4">
+                We provide a wide range of books and information about famous authors. Our collection spans across various genres including technical books, literature, self-help, and more.
+            </p>
+            <p class="text-slate-700 text-lg leading-relaxed">
+                Our goal is to make quality books accessible to everyone at competitive prices with excellent customer service.
+            </p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="space-y-6">
+            <div class="bg-gradient-to-br from-teal-50 to-blue-50 rounded-2xl p-8 border border-teal-200">
+                <h3 class="text-4xl font-bold text-teal-600 mb-2">500+</h3>
+                <p class="text-slate-700 font-semibold">Books Available</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-200">
+                <h3 class="text-4xl font-bold text-blue-600 mb-2">150+</h3>
+                <p class="text-slate-700 font-semibold">Authors & Publishers</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-cyan-50 to-indigo-50 rounded-2xl p-8 border border-cyan-200">
+                <h3 class="text-4xl font-bold text-cyan-600 mb-2">10K+</h3>
+                <p class="text-slate-700 font-semibold">Happy Customers</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Values Section -->
+    <section class="mb-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Our Values</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Quality -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl p-8 transition-shadow duration-300 border border-slate-100">
+                <div class="text-4xl mb-4">📖</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Quality</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    We carefully curate our collection to ensure only high-quality books are available to our customers.
+                </p>
+            </div>
+
+            <!-- Accessibility -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl p-8 transition-shadow duration-300 border border-slate-100">
+                <div class="text-4xl mb-4">🌍</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Accessibility</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Making quality books accessible to everyone at affordable prices with fast and reliable delivery.
+                </p>
+            </div>
+
+            <!-- Customer Service -->
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl p-8 transition-shadow duration-300 border border-slate-100">
+                <div class="text-4xl mb-4">⭐</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">Excellence</h3>
+                <p class="text-slate-600 leading-relaxed">
+                    Providing exceptional customer service and support to ensure every experience is memorable.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="bg-slate-900 rounded-3xl overflow-hidden py-16 px-8 sm:px-12 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Join Our Community</h2>
+        <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
+            Subscribe to our newsletter to get updates about new books, special offers, and exclusive content.
+        </p>
+        <button class="px-8 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors duration-200">
+            Subscribe Now
+        </button>
+    </section>
+{% endblock %}

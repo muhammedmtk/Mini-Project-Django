@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Confirmation Section -->
+    <div class="max-w-md mx-auto mt-12">
+        <div class="bg-red-50 border-2 border-red-200 rounded-2xl overflow-hidden shadow-lg">
+            <!-- Header -->
+            <div class="bg-red-600 text-white px-8 py-6 text-center">
+                <div class="text-5xl mb-3">⚠️</div>
+                <h1 class="text-2xl font-bold">Delete Author?</h1>
+            </div>
+
+            <!-- Content -->
+            <div class="px-8 py-8">
+                <p class="text-slate-700 text-center mb-6">
+                    Are you sure you want to delete this author?
+                </p>
+
+                <!-- Author Info Preview -->
+                <div class="bg-white rounded-lg p-4 mb-8 border border-slate-200">
+                    <div class="flex gap-4 items-start">
+                        {% if author.photo %}
+                        <img src="{{ author.photo.url }}" alt="{{ author.name }}" class="w-16 h-20 object-cover rounded">
+                        {% endif %}
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-slate-900 truncate">{{ author.name }}</h3>
+                            <p class="text-slate-600 text-sm">{{ author.email }}</p>
+                            <p class="text-purple-600 font-semibold mt-2">{{ author.books.count }} book{{ author.books.count|pluralize }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Message -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-8">
+                    <p class="text-yellow-800 text-sm">
+                        <strong>Warning:</strong> This action cannot be undone. The author will be permanently deleted from the database.
+                    </p>
+                </div>
+
+                <!-- Books Warning (if author has books) -->
+                {% if author.books.count > 0 %}
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-8">
+                    <p class="text-orange-800 text-sm">
+                        <strong>Note:</strong> This author has {{ author.books.count }} book{{ author.books.count|pluralize }}. Deleting this author may affect these book records.
+                    </p>
+                </div>
+                {% endif %}
+
+                <!-- Action Buttons -->
+                <form method="post" class="space-y-3">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-colors duration-200">
+                        Yes, Delete Author
+                    </button>
+                </form>
+
+                <!-- Cancel Button -->
+                <a href="{% url 'authors:detail' author.id %}" class="block w-full px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-900 font-semibold rounded-lg transition-colors duration-200 text-center">
+                    Cancel
+                </a>
+            </div>
+        </div>
+
+        <!-- Back Link -->
+        <div class="text-center mt-8">
+            <a href="{% url 'authors:index' %}" class="text-slate-700 hover:text-slate-900 font-semibold">
+                ← Back to Authors
+            </a>
+        </div>
+    </div>
+{% endblock %}

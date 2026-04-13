@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Back Button -->
+    <div class="mb-6">
+        <a href="{% url 'authors:index' %}" class="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold">
+            <span>←</span> Back to Authors
+        </a>
+    </div>
+
+    <!-- Author Detail Container -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8 sm:p-12">
+            <!-- Author Photo Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-slate-100 rounded-xl overflow-hidden h-80 flex items-center justify-center mb-6">
+                    {% if author.photo %}
+                        <img src="{{ author.photo.url }}" alt="{{ author.name }}" class="w-full h-full object-cover">
+                    {% else %}
+                        <div class="text-center">
+                            <div class="text-6xl mb-2">👤</div>
+                            <p class="text-slate-600">No photo</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Author Information Section -->
+            <div class="lg:col-span-2 flex flex-col">
+                <!-- Name -->
+                <h1 class="text-4xl font-bold text-slate-900 mb-2">
+                    {{ author.name }}
+                </h1>
+
+                <!-- Email -->
+                <p class="text-slate-600 mb-6">
+                    <span class="font-semibold">Email:</span> 
+                    <a href="mailto:{{ author.email }}" class="text-purple-600 hover:text-purple-700">{{ author.email }}</a>
+                </p>
+
+                <!-- Gender -->
+                <div class="mb-6">
+                    <span class="font-semibold text-slate-900">Gender:</span>
+                    <span class="text-slate-700 ml-2">
+                        {% if author.gender == 'm' %}Male
+                        {% elif author.gender == 'f' %}Female
+                        {% else %}Other{% endif %}
+                    </span>
+                </div>
+
+                <!-- Biography -->
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-slate-900 mb-3">Biography</h2>
+                    <p class="text-slate-700 leading-relaxed text-lg">
+                        {{ author.brief|default:author.bio }}
+                    </p>
+                </div>
+
+                <!-- Metadata -->
+                <div class="bg-slate-50 rounded-lg p-6 mb-8 space-y-3 mt-auto">
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-700 font-semibold">Member Since:</span>
+                        <span class="text-slate-900">{{ author.created_at|date:"M d, Y" }}</span>
+                    </div>
+                    <div class="border-t border-slate-200 pt-3 flex justify-between items-center">
+                        <span class="text-slate-700 font-semibold">Books Published:</span>
+                        <span class="text-slate-900 font-bold">{{ author.books.count }}</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4">
+                    <a href="{% url 'authors:edit' author.id %}" class="flex-1 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors duration-200 text-center">
+                        Edit Author
+                    </a>
+                    <a href="{% url 'authors:delete' author.id %}" class="flex-1 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors duration-200 text-center">
+                        Delete Author
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Books by Author Section -->
+    <div class="mt-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-8">Books by This Author</h2>
+        
+        {% if author.books.all %}
+            <!-- Books Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for book in author.books.all %}
+                <!-- Book Card -->
+                <div class="group relative bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl hover:-translate-y-3 transition-all duration-500">
+                    
+                    <!-- Bestseller Badge -->
+                    {% if book.is_bestseller %}
+                    <div class="absolute top-4 left-4 z-10 bg-teal-600 text-white px-4 py-2 rounded-full text-sm font-bold">
+                        ⭐ Best Seller
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Book Cover Image -->
+                    <div class="relative overflow-hidden h-72 bg-slate-200">
+                        {% if book.image %}
+                        <img 
+                            src="{{ book.image.url }}" 
+                            alt="{{ book.title }}"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        >
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center bg-slate-200">
+                            <span class="text-5xl">📖</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Card Content -->
+                    <div class="p-6">
+                        <!-- Title -->
+                        <h3 class="text-xl font-bold text-slate-900 mb-2 line-clamp-2">
+                            {{ book.title }}
+                        </h3>
+                        
+                        <!-- Price -->
+                        <p class="text-teal-600 font-bold text-2xl mb-4">
+                            ${{ book.price }}
+                        </p>
+
+                        <!-- Brief excerpt -->
+                        <p class="text-slate-600 text-sm leading-relaxed line-clamp-3 mb-6">
+                            {{ book.brief }}
+                        </p>
+                    </div>
+                    
+                    <!-- Book Details -->
+                    <div class="px-6 pb-6 flex items-center gap-4 border-t border-slate-100 pt-4">
+                        <div class="text-slate-600 text-sm">
+                            <span class="font-semibold">{{ book.no_of_page }}</span> pages
+                        </div>
+                        <a href="{% url 'books:detail' book.id %}" class="ml-auto px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors duration-200 text-center text-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+                <!-- End Book Card -->
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty State -->
+            <div class="bg-slate-50 rounded-2xl border-2 border-dashed border-slate-300 p-12 text-center">
+                <div class="text-5xl mb-4">📚</div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-2">No Books Yet</h3>
+                <p class="text-slate-600 mb-6">This author hasn't published any books yet.</p>
+                <a href="{% url 'books:create' %}" class="inline-block px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                    Add Book by This Author
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

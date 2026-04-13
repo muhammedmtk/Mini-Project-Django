@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-teal-600 to-teal-700 rounded-3xl overflow-hidden mb-12">
+        <div class="px-8 py-16 sm:px-12 sm:py-20">
+            <h1 class="text-3xl sm:text-4xl font-bold text-white mb-2">
+                Add New Book
+            </h1>
+            <p class="text-teal-100">
+                Create a new book entry in our library
+            </p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+            <!-- Display errors if any -->
+            {% if form.non_field_errors %}
+            <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+                <ul class="list-disc list-inside">
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data" class="space-y-8">
+                {% csrf_token %}
+
+                <!-- Book Information Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-200">
+                        Book Information
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Title -->
+                        <div>
+                            <label class="block text-slate-700 font-semibold mb-2">
+                                {{ form.title.label }}
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.errors %}
+                            <p class="text-red-600 text-sm mt-2">
+                                {% for error in form.title.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Brief -->
+                        <div>
+                            <label class="block text-slate-700 font-semibold mb-2">
+                                {{ form.brief.label }}
+                            </label>
+                            {{ form.brief }}
+                            {% if form.brief.errors %}
+                            <p class="text-red-600 text-sm mt-2">
+                                {% for error in form.brief.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Price and Pages Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Price -->
+                            <div>
+                                <label class="block text-slate-700 font-semibold mb-2">
+                                    {{ form.price.label }}
+                                </label>
+                                {{ form.price }}
+                                {% if form.price.errors %}
+                                <p class="text-red-600 text-sm mt-2">
+                                    {% for error in form.price.errors %}{{ error }}{% endfor %}
+                                </p>
+                                {% endif %}
+                            </div>
+
+                            <!-- Number of Pages -->
+                            <div>
+                                <label class="block text-slate-700 font-semibold mb-2">
+                                    {{ form.no_of_page.label }}
+                                </label>
+                                {{ form.no_of_page }}
+                                {% if form.no_of_page.errors %}
+                                <p class="text-red-600 text-sm mt-2">
+                                    {% for error in form.no_of_page.errors %}{{ error }}{% endfor %}
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Book Cover Image -->
+                        <div>
+                            <label class="block text-slate-700 font-semibold mb-2">
+                                {{ form.image.label }}
+                            </label>
+                            {{ form.image }}
+                            {% if form.image.errors %}
+                            <p class="text-red-600 text-sm mt-2">
+                                {% for error in form.image.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                            <p class="text-slate-500 text-sm mt-1">Accepted formats: JPG, PNG, GIF, WebP</p>
+                        </div>
+
+                        <!-- Bestseller -->
+                        <div class="flex items-center gap-3">
+                            {{ form.is_bestseller }}
+                            <label for="{{ form.is_bestseller.id_for_label }}" class="text-slate-700 font-semibold cursor-pointer">
+                                {{ form.is_bestseller.label }}
+                            </label>
+                            {% if form.is_bestseller.errors %}
+                            <p class="text-red-600 text-sm mt-2">
+                                {% for error in form.is_bestseller.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Authors Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-200">
+                        Authors
+                    </h2>
+
+                    <div class="space-y-6">
+                        <!-- Authors Selection -->
+                        <div>
+                            <label class="block text-slate-700 font-semibold mb-3">
+                                {{ form.authors.label }}
+                            </label>
+                            <p class="text-slate-600 text-sm mb-4">
+                                {{ form.authors.help_text }}
+                            </p>
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3">
+                                {% for checkbox in form.authors %}
+                                    <label class="flex items-center gap-3 cursor-pointer hover:bg-white p-3 rounded-lg transition-colors">
+                                        {{ checkbox.tag }}
+                                        <span class="text-slate-700">{{ checkbox.choice_label }}</span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                            {% if form.authors.errors %}
+                            <p class="text-red-600 text-sm mt-3">
+                                {% for error in form.authors.errors %}{{ error }}{% endfor %}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex gap-4 pt-6 border-t border-slate-200">
+                    <button type="submit" class="flex-1 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                        Create Book
+                    </button>
+                    <a href="{% url 'books:index' %}" class="flex-1 px-6 py-3 border border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold rounded-lg transition-colors duration-200 text-center">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
